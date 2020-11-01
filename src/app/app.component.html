@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <input type="text" [(ngModel)]="filteredStatus">
+      <br><br>
+      <button class="btn btn-primary" (click)="onAddServer()">Add server</button>
+      <hr>
+      <h2>App Status : {{ appStatus }}</h2>
+      <!-- impure pipe ekak meka -->
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let server of servers | filter: filteredStatus"
+          [ngClass]="getStatusClasses(server)">
+          <!-- uda lineeken thama pata wenas karala tynne ts eke tyna class eka add wenawa ngClass ekata -->
+          <strong>{{ server.name | shorten: 15 }}</strong> 
+          | 
+          {{ server.instanceType | uppercase }} 
+          | 
+          {{ server.started | date:'fullDate' }}
+          <span
+          class="badge">
+          {{ server.status }}
+        </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- date:'fullDate' mehema  pipes godak unath danna pluwann-->
